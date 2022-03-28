@@ -3,12 +3,11 @@ import { EmployeeDto } from "../dto/EmployeeDto";
 import { Department } from "../entity/Department";
 import { Employee } from "../entity/Employee";
 import SearchResult from "../util/rest/searchresult";
-import URLParams from "../util/rest/urlparams";
 
 export interface EmployeeDao {
   createEmployee(employeeData: EmployeeDto): Promise<Employee>;
 
-  getAllEmployees(searchParams: URLParams): Promise<SearchResult>;
+  getAllEmployees(searchParams: any): Promise<SearchResult>;
 
   getEmployeeById(employeeId: string): Promise<Employee>;
 

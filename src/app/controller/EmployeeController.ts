@@ -1,13 +1,11 @@
 import { NextFunction, Response } from "express";
 import multer from "multer";
 import APP_CONSTANTS from "../constants";
-import { SearchParamsDto } from "../dto/BaseParamsDto";
 import { EmployeeDto } from "../dto/EmployeeDto";
 import { EmployeeUpdateDto } from "../dto/EmployeeUpdateDto";
 import { LoginDto } from "../dto/LoginDto";
 import { DeptUpdateDto } from "../dto/DeptUpdateDto";
 import authorize from "../middleware/authorize";
-import addSearchParams from "../middleware/searchMiddleware";
 import validationMiddleware from "../middleware/validationMiddleware";
 import { EmployeeService } from "../service/EmployeeService";
 import { AbstractController } from "../util/rest/controller";
@@ -36,8 +34,6 @@ class EmployeeController extends AbstractController {
     this.router.get(
       `${this.path}`,
       authorize(),
-      addSearchParams,
-      validationMiddleware(SearchParamsDto, APP_CONSTANTS.query),
       this.asyncRouteHandler(this.getAllEmployees)
     );
 
@@ -108,7 +104,7 @@ class EmployeeController extends AbstractController {
     response: Response,
     next: NextFunction
   ) => {
-    const urlParams = request.searchParams;
+    const urlParams = request.query;
     const { data, total } = await this.employeeService.getAllEmployees(
       urlParams
     );

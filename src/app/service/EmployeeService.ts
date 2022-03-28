@@ -6,12 +6,10 @@ import { TokenResponseDto } from "../dto/TokenResponseDto";
 import { Department } from "../entity/Department";
 import { Employee } from "../entity/Employee";
 import SearchResult from "../util/rest/searchresult";
-import URLParams from "../util/rest/urlparams";
-
 export interface EmployeeService {
   createEmployee(employeeData: EmployeeDto): Promise<Employee>;
 
-  getAllEmployees(searchParams: URLParams): Promise<SearchResult>;
+  getAllEmployees(searchParams: any): Promise<SearchResult>;
 
   updateEmployee(
     employeeId: string,

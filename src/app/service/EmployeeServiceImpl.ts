@@ -1,7 +1,6 @@
 import { ErrorCodes } from "../util/errorCode";
 import EntityNotFoundException from "../exception/EntityNotFoundException";
 import bcrypt from "bcrypt";
-import URLParams from "../util/rest/urlparams";
 import SearchResult from "../util/rest/searchresult";
 import { EmployeeService } from "./EmployeeService";
 import { EmployeeDao } from "../repository/EmployeeDao";
@@ -34,7 +33,7 @@ class EmployeeServiceImpl implements EmployeeService {
   };
 
   public getAllEmployees = async (
-    searchParams: URLParams
+    searchParams: any
   ): Promise<SearchResult> => {
     const results: SearchResult = await this.employeeDao.getAllEmployees(
       searchParams

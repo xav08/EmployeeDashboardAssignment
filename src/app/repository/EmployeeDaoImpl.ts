@@ -7,9 +7,7 @@ import {
 } from "typeorm";
 import EntityNotFoundException from "../exception/EntityNotFoundException";
 import { ErrorCodes } from "../util/errorCode";
-import URLParams from "../util/rest/urlparams";
 import SearchResult from "../util/rest/searchresult";
-import { SortOrder } from "../util/constants/SortOrder";
 import { EmployeeDao } from "./EmployeeDao";
 import { Employee } from "../entity/Employee";
 import { EmployeeDto } from "../dto/EmployeeDto";
@@ -55,7 +53,7 @@ class EmployeeDaoImpl implements EmployeeDao {
   };
 
   public getAllEmployees = async (
-    searchParams: URLParams
+    searchParams: any
   ): Promise<SearchResult> => {
     const employeeRepo = getRepository(Employee)
       .createQueryBuilder("employee")
@@ -69,10 +67,7 @@ class EmployeeDaoImpl implements EmployeeDao {
       employeeRepo.skip(searchParams.offset);
     }
 
-    const order: SortOrder =
-      (searchParams.order as SortOrder) || SortOrder.DESC;
-
-    employeeRepo.orderBy(`employee.${searchParams.sort || "name"}`, order);
+    employeeRepo.orderBy(`employee.${searchParams.sort || "name"}`, 'DESC');
 
     const [records, total] = await employeeRepo.getManyAndCount();
     return {

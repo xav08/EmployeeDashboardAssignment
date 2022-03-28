@@ -1,5 +1,4 @@
 import express from "express";
-import { UserStatus } from "../constants/UserStatus";
 import UserNotAuthorizedException from "../exception/UserNotAuthorizedException";
 import { getTokenFromRequestHeader } from "../util/appUtil";
 import RequestWithUser from "../util/rest/request";

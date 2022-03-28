@@ -8,7 +8,7 @@ const APP_CONSTANTS = {
     basePath:`http://localhost:${process.env.PORT}`,
 
     // Add the short name of the service below
-    service: "svc"
+    service: "employee-app"
 };
 
 export default APP_CONSTANTS;
