@@ -4,31 +4,31 @@ import { PostgresConnectionOptions } from "typeorm/driver/postgres/PostgresConne
  * Uses env params to configure TypeORM database library
  */
 const config: { [key: string]: PostgresConnectionOptions } = {
-  // Below config to be used for tests
-  test: {
-    // hardcoding test database as myapp_test_db to prevent misuse
-    database: "myapp_test_db",
-    // Use the service name as schema name
-    // schema: "my_app_service",
-    entities: [
-      "dist/app/entity/*{.ts,.js}",
-    ],
-    extra: { max: 5, min: 2 }, // connection pool
-    host: "localhost",
-    password: "postgres",
-    port: 5432,
-    synchronize: false,
-    logging: false,
-    type: "postgres",
-    username: "postgres",
-    namingStrategy: new SnakeNamingStrategy(),
-    migrations: ["dist/migrations/*.js"],
-    migrationsRun: true,
-    cli: {
-      migrationsDir: "src/migrations"
-    }
-  },
-  // Below config to be used for deployments
+  // // Below config to be used for tests
+  // test: {
+  //   // hardcoding test database as myapp_test_db to prevent misuse
+  //   database: "myapp_test_db",
+  //   // Use the service name as schema name
+  //   // schema: "my_app_service",
+  //   entities: [
+  //     "dist/app/entity/*{.ts,.js}",
+  //   ],
+  //   extra: { max: 5, min: 2 }, // connection pool
+  //   host: "localhost",
+  //   password: "postgres",
+  //   port: 5432,
+  //   synchronize: false,
+  //   logging: false,
+  //   type: "postgres",
+  //   username: "postgres",
+  //   namingStrategy: new SnakeNamingStrategy(),
+  //   migrations: ["dist/migrations/*.js"],
+  //   migrationsRun: true,
+  //   cli: {
+  //     migrationsDir: "src/migrations"
+  //   }
+  // },
+  // Below config to be used for local
   local: {
     database: process.env.POSTGRES_DB,
     // Use the service name as schema name
