@@ -34,7 +34,7 @@ const config: { [key: string]: PostgresConnectionOptions } = {
     // Use the service name as schema name
     // schema: "my_app_service",
     entities: [
-      "dist/app/entity/*{.ts,.js}",
+      "dist/app/entities/*{.ts,.js}",
     ],
     extra: { max: 5, min: 2 }, // connection pool
     host: process.env.POSTGRES_HOST,
