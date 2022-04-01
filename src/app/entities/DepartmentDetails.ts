@@ -15,11 +15,4 @@ export class DepartmentDetails extends AbstractEntity {
 
     @Column({ nullable: true })
     public website: string;
-
-    @OneToOne((type) => Department, (department) => department.departmentDetails)
-    @JoinColumn()
-    public department: Department;
-
-    @Column()
-    public departmentId: string;
 }

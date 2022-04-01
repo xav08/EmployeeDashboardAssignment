@@ -15,7 +15,10 @@ export class Department extends AbstractEntity {
     @JoinColumn()
     public employee: Employee[];
 
-    @OneToOne((type) => DepartmentDetails, (departmentDetails) => departmentDetails.department)
+    @OneToOne((type) => DepartmentDetails, (departmentDetails) => departmentDetails)
     @JoinColumn()
     public departmentDetails: DepartmentDetails;
+
+    @Column({ nullable: true })
+    public departmentDetailsId: string;
 }

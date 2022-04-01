@@ -1,5 +1,7 @@
 import { NextFunction, Response } from "express";
 import APP_CONSTANTS from "../constants";
+import { CreateEmployeeDto } from "../dto/CreateEmployee";
+import validationMiddleware from "../middleware/validationMiddleware";
 import { EmployeeService } from "../services/EmployeeService";
 import { AbstractController } from "../util/rest/controller";
 import RequestWithUser from "../util/rest/request";
@@ -27,6 +29,7 @@ class EmployeeController extends AbstractController {
     );
     this.router.post(
       `${this.path}`,
+      // validationMiddleware(CreateEmployeeDto, APP_CONSTANTS.body),
       // this.asyncRouteHandler(this.createEmployee)
       this.createEmployee
     );
