@@ -1,4 +1,5 @@
 import { NextFunction, Response } from "express";
+import multer from "multer";
 import APP_CONSTANTS from "../constants";
 import { CreateEmployeeDto } from "../dto/CreateEmployee";
 import validationMiddleware from "../middleware/validationMiddleware";
@@ -11,8 +12,9 @@ import RequestWithUser from "../util/rest/request";
  */
 class EmployeeController extends AbstractController {
 
+  private upload = multer({ dest: "./public/uploads/"});
   constructor(
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
   ) {
     super(`${APP_CONSTANTS.apiPrefix}/employees`);
     this.initializeRoutes();
@@ -40,6 +42,12 @@ class EmployeeController extends AbstractController {
     this.router.delete(
       `${this.path}/:employeeId`,
       this.asyncRouteHandler(this.deleteEmployee)
+    );
+
+    this.router.post(
+      `${this.path}/upload`,
+      this.upload.single("file"),
+      this.asyncRouteHandler(this.uploadImage)
     );
   }
 
@@ -101,6 +109,22 @@ class EmployeeController extends AbstractController {
         this.fmt.formatResponse(data, Date.now() - request.startTime, "OK")
       );
   }
+
+  private uploadImage = async (
+    request: RequestWithUser,
+    response: Response,
+    next: NextFunction
+  ) => {
+    const filePath = `${APP_CONSTANTS.basePath}/${request.file.path.slice(7)}`;
+    response.send(
+      this.fmt.formatResponse(
+        { filePath },
+        Date.now() - request.startTime,
+        "OK"
+      )
+    );
+  }
+
 }
 
 export default EmployeeController;
